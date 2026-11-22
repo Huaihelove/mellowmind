@@ -1,0 +1,102 @@
+{
+  "identifier": "2BF68D0B-ED21-46CA-B8EB-ABEA8D4A3876",
+  "nonRenewingSubscriptions": [],
+  "products": [
+    {
+      "displayPrice": "6.00",
+      "familyShareable": false,
+      "internalID": "6AEE393B-1C4F-4E2D-BA87-9F7D0D911B79",
+      "localizations": [
+        {
+          "description": "Unlocks the Moon Tide and Starlight card-back skins. Visual only.",
+          "displayName": "Tarot Skin Pack",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.mellowmind.iap.tarot.skinpack",
+      "referenceName": "Tarot Skin Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "6.00",
+      "familyShareable": false,
+      "internalID": "D3AB3B25-4BF7-4AA8-8A5D-62CCD2C88BF7",
+      "localizations": [
+        {
+          "description": "Unlocks the Jade and Sakura Snow wish-tube skins. Visual only.",
+          "displayName": "Wish Tube Skin Pack",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.mellowmind.iap.tube.skinpack",
+      "referenceName": "Wish Tube Skin Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "12.00",
+      "familyShareable": false,
+      "internalID": "D55FBE3C-A59B-40AC-BFBE-CF3EE8F05742",
+      "localizations": [
+        {
+          "description": "Removes the free local limit of three sealed wishes. Data remains on device.",
+          "displayName": "Unlimited Wish Seals",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.mellowmind.iap.unlimited.wishseals",
+      "referenceName": "Unlimited Wish Seals",
+      "type": "NonConsumable"
+    }
+  ],
+  "settings": {
+    "_failTransactionsEnabled": false,
+    "_locale": "en_US",
+    "_storefront": "USA",
+    "_storeKitErrors": [
+      {
+        "current": null,
+        "enabled": false,
+        "name": "Load Products"
+      },
+      {
+        "current": null,
+        "enabled": false,
+        "name": "Purchase"
+      }
+    ]
+  },
+  "subscriptionGroups": [
+    {
+      "id": "F119711D-EA03-4A55-9E7D-686C94EF7FA6",
+      "localizations": [],
+      "name": "Premium Emotional Care",
+      "subscriptions": [
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "18.00",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "030A98C4-836B-44C4-9E5C-6E124619E894",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "A deeper daily emotional-care report for self-reflection. Not medical advice.",
+              "displayName": "Premium Daily Emotional Report",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "com.mellowmind.iap.dailyreport.monthly",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "Premium Daily Emotional Report",
+          "subscriptionGroupID": "F119711D-EA03-4A55-9E7D-686C94EF7FA6",
+          "type": "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 3,
+    "minor": 0
+  }
+}

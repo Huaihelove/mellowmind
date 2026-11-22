@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fbf3e6">
+  <title>Mellow Mind · Interactive Demo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="subpages.css">
+  <link rel='stylesheet' href='ritual.css'>
+</head>
+<body>
+  <canvas id="starCanvas" aria-hidden="true"></canvas>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="ambient ambient-three" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">M</div>
+        <div><strong>Mellow Mind</strong><span>CALM · REFLECT · HEAL</span></div>
+      </div>
+      <p class="sidebar-note">Set down emotional tension.<br>Make ordinary days gentler.</p>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-page="home"><span>✦</span><b>Today</b></button>
+        <button class="nav-item" data-page="profile"><span>◌</span><b>Profile</b></button>
+        <button class="nav-item" data-page="tarot"><span>☾</span><b>Reflection Cards</b></button>
+        <button class="nav-item" data-page="wish"><span>✦</span><b>With Ritual</b></button>
+        <button class="nav-item" data-page="calendar"><span>✧</span><b>Daily Almanac</b></button>
+        <button class="nav-item" data-page="heal"><span>♡</span><b>Healing Space</b></button>
+        <button class="nav-item" data-page="collection"><span>▣</span><b>Collection &amp; Skins</b></button>
+        <button class="nav-item" id="settingsNavBtn" type="button" aria-label="Settings">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M12.1 8.8c1.8-.1 3.4 1.3 3.5 3.1.1 1.9-1.3 3.4-3.2 3.5-1.8.1-3.4-1.3-3.5-3.1-.1-1.8 1.3-3.4 3.2-3.5Z"/><path d="M12 2.9c.2 1 .2 1.9.1 2.9M12 18.2c.1 1 .1 1.9 0 2.9M2.8 12c1-.2 2-.2 3-.1M18.2 12c1-.1 2-.1 3 0M5.5 5.5c.7.7 1.4 1.4 2 2.1M16.5 16.5c.7.7 1.4 1.4 2.1 2M18.5 5.6c-.7.7-1.4 1.4-2.1 2M7.5 16.5c-.7.7-1.4 1.4-2 2.1"/></svg></span>
+          <b>Settings</b>
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="soft-button wide" id="settingsBtn">Settings · Privacy · About</button>
+        <span class="local-chip">● Local-only demo</span>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div><p class="eyebrow" id="todayLabel">Today</p><h1 id="topTitle">Today's Sanctuary</h1></div>
+        <div class="top-actions">
+          <span class="local-pill">Local first · Data stays on this device</span>
+          <button class="icon-button" id="themeBtn" aria-label="Toggle light and dark mode">◐</button>
+          <button class="icon-button" id="settingsTopBtn" aria-label="Settings">⚙</button>
+          <button class="icon-button" id="restartBtn" aria-label="Restart profile setup">↻</button>
+        </div>
+      </header>
+
+      <section class="page active" id="page-home">
+        <div class="home-stage">
+          <svg class="home-svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+            <defs>
+              <symbol id="mm-home-cloud" viewBox="0 0 180 84">
+                <path d="M13 64c-5-2-8-7-8-13 0-9 7-16 16-16 2 0 5 .4 7 1.2C31 24 41 16 54 16c13 0 24 9 27 21 4-2 8-3 13-3 11 0 19 8 20 18 8 1 14 7 14 15 0 9-8 16-18 16H31c-8 0-15-4-18-11Z" fill="#fbf1e1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M24 75c28-2 55-2 83 0" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linecap="round" opacity=".55"/>
+              </symbol>
+              <symbol id="mm-home-heart" viewBox="0 0 48 48">
+                <path d="M24 38c-6-4.7-13-10.2-13-17.1C11 16 15.2 12 20.2 12c1.7 0 3.3.6 4.6 1.8 1.4-1.2 3-1.8 4.7-1.8 5 0 9.2 4 9.2 8.9C38.7 27.8 32 33.3 24 38Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18 21.7c2.3.3 4.4-.6 5.7-2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+              </symbol>
+              <symbol id="mm-home-flower" viewBox="0 0 48 48">
+                <path d="M23.5 18.4c-1.9-4.2-1.1-8.2 2.5-10.2 2.6 3.2 2.4 7.1-.5 10.3M29.4 23.2c4.5-.9 8 .7 9.1 4.7-3.8 1.8-7.5.7-9.8-2.9M24.3 29.5c2.2 3.9 1.7 7.8-1.7 10.2-2.8-3-3-6.9-.4-10.3M18.4 24.4c-4.4 1.4-8 .1-9.2-3.9 3.7-2.1 7.4-1.1 9.9 2.3" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M23.5 19.1c3.2-.4 5.9 2.1 5.6 5.2-.3 3-2.9 5.2-5.9 4.8-3-.4-5-3.1-4.4-6.1.4-2.1 2.2-3.7 4.7-3.9Z" fill="#f7c3ad" stroke="currentColor" stroke-width="1.15"/>
+              </symbol>
+              <symbol id="mm-home-bowl" viewBox="0 0 48 48">
+                <path d="M10.2 24.2h27.7c.3 8-5.3 14.1-13.6 14.4-8.5.3-13.8-5.8-14.1-14.4Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.4 24c1.8-1 3.6-1 5.4 0M24 24c1.8-1 3.6-1 5.4 0M31 35.1c2.5 1.4 5 1.3 7.5-.1" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+                <path d="M16.6 14.4c-2.3-2-2.2-4.3 0-6.1M24.1 15.2c-2.2-2.2-1.8-4.5.5-6.4M30.2 13.5c-1.8-1.8-1.4-3.8.7-5.4" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/>
+              </symbol>
+              <symbol id="mm-home-coffee" viewBox="0 0 190 190">
+                <path d="M38 65c23-8 69-9 98-1 3 24-4 50-16 68-8 12-18 18-32 18-19 0-32-10-42-28-10-18-14-39-8-57Z" fill="#fbf1e1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M136 77c19-7 33 4 34 19 1 17-12 30-33 26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M35 66c24-7 70-8 103-1" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+                <path d="M45 72c14-2 28-3 42-3 14 0 28 1 42 4-9 4-18 6-28 7-17 1-35 0-56-8Z" fill="#c65f43" opacity=".86"/>
+                <path d="M21 160c29-5 59-7 88-6 28 1 52 3 69 6-19 8-39 12-60 13-33 1-65-3-97-13Z" fill="#f8ead8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M73 49c-8-10-5-20 2-28M91 47c-8-11-4-21 2-30M108 50c-6-9-3-19 3-27" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" opacity=".7"/>
+              </symbol>
+              <symbol id="mm-home-bubble" viewBox="0 0 170 120">
+                <path d="M16 29c15-13 38-20 67-19 34 1 63 11 72 27 9 17-8 35-36 47-16 7-35 11-55 11-12 0-23-2-33-5l-24 17c3-8 5-15 5-22C3 71-2 43 16 29Z" fill="#fff8ea" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M60 51c2-3 6-3 8 0M83 52c2-3 6-3 8 0M68 66c6 3 12 3 18-1" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/>
+                <path d="M137 43c5 0 9-2 12-6M142 56c5 0 9 2 12 6" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>
+              </symbol>
+              <symbol id="mm-home-leaf" viewBox="0 0 190 130">
+                <path d="M15 112C46 93 76 70 113 43c19-14 40-25 61-33-10 28-26 51-48 68-30 23-66 34-102 38-5 1-9-1-9-4Z" fill="#d7e0c3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 112c29-27 63-42 101-46M63 88c-2-13-7-24-16-33M84 72c8-2 16-2 24 0M101 60c-2-9-5-17-10-23M69 83c10-1 19 1 27 5M111 54c8-1 16 1 23 5" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linecap="round" opacity=".72"/>
+              </symbol>
+            </defs>
+          </svg>
+
+          <div class="home-doodles" aria-hidden="true">
+            <span class="home-doodle doodle-cloud-a"><svg viewBox="0 0 180 84"><use href="#mm-home-cloud"/></svg></span>
+            <span class="home-doodle doodle-cloud-b"><svg viewBox="0 0 180 84"><use href="#mm-home-cloud"/></svg></span>
+            <span class="home-doodle doodle-cloud-c"><svg viewBox="0 0 180 84"><use href="#mm-home-cloud"/></svg></span>
+            <span class="home-doodle doodle-star-card">
+              <svg viewBox="0 0 126 166">
+                <path d="M14 9c28-4 58-3 87 2 5 1 10 6 11 11 3 42 3 84 0 126-1 6-5 10-11 11-28 4-56 4-84 1-7-1-11-5-12-12-3-40-3-80 0-120C6 18 9 11 14 9Z" fill="#261c18" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M38 96c1 6 4 10 9 13-5 3-8 7-9 13-2-6-5-10-10-13 5-3 8-7 10-13ZM88 57c2 11 7 18 14 22-7 5-12 12-14 22-3-10-8-17-16-22 8-4 13-11 16-22Z" fill="#fff8eb"/>
+                <path d="M77 128c1 3 2 5 5 7-3 1-4 3-5 6-1-3-3-5-5-6 3-2 4-4 5-7ZM49 50c1 3 2 5 5 6-3 1-4 3-5 6-1-3-3-5-5-6 2-1 4-3 5-6ZM83 91c1 2 2 4 4 5-2 1-3 3-4 5-1-2-2-4-4-5 2-1 3-3 4-5Z" fill="#fff8eb" opacity=".86"/>
+              </svg>
+            </span>
+            <span class="home-doodle doodle-planet">
+              <svg viewBox="0 0 76 76">
+                <circle cx="38" cy="38" r="15.5" fill="#f6c7b2" stroke="currentColor" stroke-width="1.45"/>
+                <path d="M12 51c10 5 19 7 29 7 16 0 28-6 32-15M7 43c8-4 18-7 29-8 14-1 27 1 34 6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                <path d="M31 32c2-2 5-2 7 0M43 42c3 0 5 1 6 3" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity=".55"/>
+              </svg>
+            </span>
+            <span class="home-doodle doodle-pillow">
+              <svg viewBox="0 0 250 184">
+                <path d="M20 47C36 29 65 19 98 16c41-4 82 1 117 17 17 8 26 19 22 33-6 23-22 44-42 60-22 18-47 29-74 32-20 2-38-4-54-17-18-15-33-34-41-56-5-15-3-25 4-38Z" fill="#f1ad8e" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M24 48c30-23 64-32 101-31 31 0 63 9 95 26-15 3-31 8-47 16-31 15-62 28-93 39-14 5-27 7-39 5-8-16-14-34-17-55Z" fill="#f8cbb4" opacity=".83"/>
+                <path d="M33 132c23 10 46 15 70 15 18 0 36-3 54-10M42 151c20 7 41 9 64 7" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity=".36"/>
+                <path d="M115 92c9-8 22-5 27 5M119 104c10 0 19 4 24 11M123 84c-7 4-11 11-12 19" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" opacity=".78"/>
+              </svg>
+            </span>
+            <span class="home-doodle doodle-leaf-a"><svg viewBox="0 0 190 130"><use href="#mm-home-leaf"/></svg></span>
+            <span class="home-doodle doodle-leaf-b"><svg viewBox="0 0 190 130"><use href="#mm-home-leaf"/></svg></span>
+            <span class="home-doodle doodle-coffee"><svg viewBox="0 0 190 190"><use href="#mm-home-coffee"/></svg></span>
+            <span class="home-doodle doodle-bubble"><svg viewBox="0 0 170 120"><use href="#mm-home-bubble"/></svg></span>
+            <span class="home-doodle doodle-star-a"><svg viewBox="0 0 40 40"><path d="M20 4c1 7 4 10 11 11-7 2-10 5-11 12-2-7-5-10-12-12 7-1 10-4 12-11Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></span>
+            <span class="home-doodle doodle-star-b"><svg viewBox="0 0 24 24"><path d="M12 3c.8 5 2.4 7 7 8-4.6 1-6.2 3-7 8-.8-5-2.4-7-7-8 4.6-1 6.2-3 7-8Z" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></span>
+          </div>
+
+          <div class="home-mini-rail" aria-hidden="true">
+            <span class="home-rail-icon"><svg viewBox="0 0 24 24"><path d="M12.1 3.3c4.8-.1 8.7 3.8 8.8 8.6.1 4.8-3.8 8.7-8.6 8.8-4.8.1-8.7-3.8-8.8-8.6-.1-4.8 3.7-8.7 8.6-8.8Z"/><path d="M12 7.4c-.1 3.1-.1 4.7-.1 4.7 1.9.2 3.7 1 5.3 2.2"/></svg></span>
+            <span class="home-rail-icon"><svg viewBox="0 0 24 24"><path d="M10.4 4.2c3.5-.1 6.4 2.7 6.5 6.2.1 3.5-2.7 6.4-6.2 6.5-3.5.1-6.4-2.7-6.5-6.2-.1-3.5 2.7-6.4 6.2-6.5Z"/><path d="M15.2 15.1c1.4 1.3 2.8 2.7 4.2 4.2"/></svg></span>
+            <span class="home-rail-icon"><svg viewBox="0 0 24 24"><path d="M12 19.8c-3.1-2.2-6.8-5.3-6.8-8.8 0-2.5 2.1-4.6 4.6-4.6.8 0 1.6.3 2.2.8.7-.5 1.4-.8 2.3-.8 2.5 0 4.6 2.1 4.6 4.6 0 3.6-3.7 6.6-6.9 8.8Z"/></svg></span>
+            <span class="home-rail-icon"><svg viewBox="0 0 24 24"><path d="M6.7 17c-1.7 0-3.1-1.3-3.1-3 0-1.5 1.1-2.8 2.6-3 .3-2.3 2.1-4 4.4-4 2.1 0 3.9 1.5 4.3 3.5 1.9-.1 3.5 1.3 3.7 3.1.1 1.8-1.2 3.4-3 3.5-3 .1-5.9.1-8.9-.1Z"/></svg></span>
+            <span class="home-rail-icon"><svg viewBox="0 0 24 24"><path d="M19.4 4.3c-4.8.3-8.8 2.1-11.2 5-1.8 2.3-1.4 5 .5 6.2 1.9 1.2 4.4.8 6.1-.9 2.3-2.4 3.6-6 4.6-10.3Z"/><path d="M4.6 20c2.1-4.7 5.2-8.1 9.5-10.6"/></svg></span>
+            <span class="home-rail-icon"><svg viewBox="0 0 24 24"><path d="M12 10.1c-1.2-1.5-1.2-3.4 0-4.9 1.6 1.1 1.9 3 .8 4.7M13.7 11.8c1.9-.7 3.7-.1 4.7 1.6-1.5 1.2-3.5 1-4.8-.5M11.8 13.9c.8 1.9.3 3.8-1.3 4.9-1.4-1.5-1.1-3.6.3-4.9M10 12c-1.9.8-3.8.3-4.9-1.3 1.4-1.3 3.4-1 4.8.4"/><path d="M11.8 10.3c1.1-.1 2 .8 1.9 1.8-.1 1-1.1 1.7-2.1 1.4-1-.3-1.5-1.4-1-2.3.2-.5.7-.8 1.2-.9Z"/></svg></span>
+          </div>
+
+          <header class="home-hero">
+            <div class="home-wordmark">MellowMind</div>
+            <h1 class="home-headline">Set down emotional tension.</h1>
+            <p class="home-subline">Make today feel lighter.</p>
+            <p class="home-description">Cards, sticks, and starlight are only gentle prompts for self-reflection, nothing here predicts your future; everything here is a space to notice how you feel now.</p>
+            <div class="home-cta">
+              <button class="home-begin" type="button" data-go="tarot">Begin Reflection Cards</button>
+              <button class="home-quiet" type="button" data-go="heal">Open the Quiet Room</button>
+            </div>
+          </header>
+
+          <div class="home-card-row">
+            <article class="home-card home-card--index">
+              <span class="home-card-symbol" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#mm-home-heart"/></svg></span>
+              <button class="home-card-plus" type="button" data-go="tarot" aria-label="Open reflection cards">+</button>
+              <h3>Inner<br>Index <span id="homeEaseScore">82</span></h3>
+              <p class="home-card-note" id="homeIndexNote">Today's inner index</p>
+            </article>
+            <article class="home-card home-card--friction">
+              <span class="home-card-symbol" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#mm-home-flower"/></svg></span>
+              <button class="home-card-plus" type="button" data-go="tarot" aria-label="Open friction cue reflection">+</button>
+              <h3>Friction Cue<br>Comparison</h3>
+              <p class="home-card-note" id="homeFrictionNote">Today's friction cue</p>
+            </article>
+            <article class="home-card home-card--strength">
+              <span class="home-card-symbol" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#mm-home-bowl"/></svg></span>
+              <button class="home-card-plus" type="button" data-go="heal" aria-label="Open the quiet room">+</button>
+              <h3>Gentle<br>Strength<br>Boundaries</h3>
+              <p class="home-card-note" id="homeStrengthNote">Your gentle strength</p>
+            </article>
+          </div>
+
+          <div class="home-bottom">
+            <div class="home-side-stack">
+              <button class="home-profile-tag" type="button" data-go="profile" aria-label="Open personality profile"><span id="homeIdentity">Scorpio · Pig · Type O</span></button>
+              <blockquote class="home-quote-card"><span>“holding your boundary even under pressure”</span></blockquote>
+            </div>
+            <article class="home-mini-panel">
+              <h3>Small ways to unwind today</h3>
+              <ul class="home-mini-list" id="homeUnwindList">
+                <li>Unclench your jaw and take one slow breath</li>
+                <li>Step into daylight for a quiet minute</li>
+                <li>Let one unfinished task wait softly</li>
+              </ul>
+            </article>
+            <article class="home-mini-panel">
+              <h3>Right now you can</h3>
+              <div class="home-action-list">
+                <button class="home-action" type="button" data-go="tarot">Draw a card</button>
+                <button class="home-action" type="button" data-go="heal">Step into quiet</button>
+                <button class="home-action" type="button" data-go="calendar">Read today's note</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-profile">
+        <div class="page-intro"><p class="eyebrow">MULTI-DIMENSIONAL SELF</p><h2>Personality Profile</h2><p>Blood type, sun sign, and zodiac animal are used only as playful personality references. Together they shape a gentle guide for your current emotional needs.</p></div>
+        <div class="content-grid profile-layout">
+          <article class="glass panel form-panel">
+            <div class="panel-head"><div><p class="eyebrow">YOUR DETAILS</p><h3>Edit profile</h3></div><span class="tag">Saved locally</span></div>
+            <label class="field-label">Blood type</label>
+            <div class="chip-row" id="bloodPicker"><button class="choice-chip" data-blood="A">A</button><button class="choice-chip" data-blood="B">B</button><button class="choice-chip" data-blood="O">O</button><button class="choice-chip" data-blood="AB">AB</button></div>
+            <label class="field-label" for="birthdayInput">Solar birthday</label><input class="field-input" id="birthdayInput" type="date">
+            <label class="field-label" for="yearInput">Birth year</label><input class="field-input" id="yearInput" type="number" min="1940" max="2026" inputmode="numeric">
+            <div class="auto-preview" id="autoPreview"></div>
+            <button class="primary-button wide" id="saveProfileBtn">Save and generate today's guide</button>
+          </article>
+          <div id="profileResult" class="profile-result"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-tarot">
+        <div class="page-intro"><p class="eyebrow">EMOTIONAL REFLECTION CARDS</p><h2>Gentle Reflection Cards</h2><p>No future is predicted. Each card reflects your present emotional weather, a thought you may be overlooking, and one kind way to return to yourself.</p></div>
+        <article class="glass ritual-panel">
+          <div class="ritual-copy"><div class="step-pill" id="tarotStepLabel">Step 1 · Hold to gather energy</div><h3 id="tarotPrompt">Bring your attention back to now</h3><p id="tarotHint">Hold the moon orb for 1.6 seconds and take one quiet breath.</p></div>
+          <div class="tarot-workspace">
+            <div class="charge-wrap" id="chargeWrap"><button class="charge-orb" id="chargeBtn" aria-label="Hold to gather energy"><span>Hold</span><small>to center</small></button><div class="charge-caption" id="chargeCaption">Breathe · soften your shoulders</div></div>
+            <div class="shuffle-zone hidden" id="shuffleZone"><div class="shuffle-stack" id="shuffleStack"><i></i><i></i><i></i><i></i></div><p>Press and drag left or right to shuffle</p><div class="progress-track"><i id="shuffleProgress"></i></div></div>
+            <div class="card-stage hidden" id="cardStage"></div>
+          </div>
+        </article>
+        <div id="tarotReading"></div>
+      </section>
+
+      <section class="page" id="page-wish">
+        <div class="page-intro"><p class="eyebrow">GENTLE RITUAL & WISHES</p><h2>Wish Ritual</h2><p>Peace, healing, ease, flow, and tenderness. Wish-stick notes offer gentle everyday prompts—never judgments of good or bad fortune.</p></div>
+        <div class="segmented" id="wishTabs"><button class="active" data-wish="draw">Draw a wish</button><button data-wish="wall">Wish wall</button><button data-wish="seal">Seal a wish</button><button data-wish="checkin">Daily check-in</button></div>
+        <div id="wishContent"></div>
+      </section>
+
+      <section class="page" id="page-calendar">
+        <div class="page-intro"><p class="eyebrow">DAILY EMOTIONAL ALMANAC</p><h2>Daily Emotional Almanac</h2><p>Refreshed each day. It adapts to your personality references and current emotional needs without predicting any future events.</p></div>
+        <div id="calendarContent"></div>
+      </section>
+
+      <section class="page" id="page-heal">
+        <div class="page-intro"><p class="eyebrow">PRIVATE HEALING SPACE</p><h2>Your Healing Space</h2><p>A quiet room, an anxiety sorter, and local sound therapy. Your words stay on this device whenever possible.</p></div>
+        <div class="segmented" id="healTabs"><button class="active" data-heal="tree">Quiet room</button><button data-heal="dissect">Anxiety sorter</button><button data-heal="audio">Sound therapy</button></div>
+        <div id="healContent"></div>
+      </section>
+
+      <section class="page" id="page-collection">
+        <div class="page-intro"><p class="eyebrow">YOUR LITTLE ARCHIVE</p><h2>Reflections & Skins</h2><p>Keep the words that help. Daily self-care can unlock basic skins; premium skins and deeper reports are modeled with a StoreKit 2 framework.</p></div>
+        <div class="segmented" id="collectionTabs"><button class="active" data-collection="cards">Healing album</button><button data-collection="store">Skin shop</button></div>
+        <div id="collectionContent"></div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="compliance-footer"><span>Disclaimer: All content is for personality reference and emotional comfort only. It is not a fortune-telling service and cannot predict the future.</span><nav><button data-legal="privacy">Privacy</button><button data-legal="terms">Terms</button><button data-legal="about">About</button></nav></footer>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <button class="active" data-page="home"><span>✦</span><small>Today</small></button>
+    <button data-page="profile"><span>◌</span><small>Profile</small></button>
+    <button data-page="tarot"><span>☾</span><small>Cards</small></button>
+    <button data-page="wish"><span>✦</span><small>Wish</small></button>
+    <button data-page="calendar"><span>✧</span><small>Daily</small></button>
+    <button data-page="heal"><span>♡</span><small>Heal</small></button>
+    <button data-page="collection"><span>▣</span><small>Saved</small></button>
+  </nav>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div id="modalBody"></div></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="icons.js"></script>
+  <script src="app.js"></script>
+  <script src='ritual-art.js'></script>
+  <script src='ritual.js'></script>
+</body>
+</html>

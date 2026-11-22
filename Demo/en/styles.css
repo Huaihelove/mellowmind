@@ -1,0 +1,9 @@
+/* English demo typography and copy-fitting overrides. */
+@import url("../styles.css");
+body { font-family: var(--sans); }
+h1, h2, h3, .brand strong, .hero h2, .reading-hero h3, .metric-card strong, .fusion-card h4, .card-front strong, .keyword-bar strong, .score-ring strong, .streak-banner strong, .stick-choice, .brand-mark {
+  font-family: var(--display);
+}
+.insight-quote, .tube::after { font-family: var(--serif); }
+.tube::after { content: "WISH"; letter-spacing: .12em; }
+.brand span { letter-spacing: .14em; }

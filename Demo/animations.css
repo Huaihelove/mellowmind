@@ -1,0 +1,165 @@
+/* Mellow Mind demo: motion layer.
+   Every animation is intentionally slow and low-contrast.
+   Turn motion off from Settings > Gentle motion, or by setting data-motion="off" on <html>. */
+
+:root {
+  --motion-quick: 260ms;
+  --motion-soft: 520ms;
+  --motion-slow: 8s;
+}
+
+@keyframes mm-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.025); }
+}
+
+@keyframes mm-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -7px, 0); }
+}
+
+@keyframes mm-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(8px, -10px, 0) rotate(2deg); }
+}
+
+@keyframes mm-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes mm-twinkle {
+  0%, 100% { opacity: .48; transform: scale(.92); }
+  50% { opacity: .9; transform: scale(1.06); }
+}
+
+@keyframes mm-rise {
+  from { opacity: 0; transform: translateY(11px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mm-halo {
+  0%, 100% { box-shadow: 0 24px 48px rgba(58, 120, 146, .18), inset -16px -20px 36px rgba(39, 91, 111, .13); }
+  50% { box-shadow: 0 29px 58px rgba(58, 120, 146, .24), inset -16px -20px 36px rgba(39, 91, 111, .1); }
+}
+
+.ambient { animation: mm-drift 18s var(--ease-soft) infinite alternate; }
+.ambient-two { animation-delay: -6s; }
+.ambient-three { animation-delay: -11s; }
+
+.orbit-ring { animation: mm-drift 20s var(--ease-soft) infinite alternate; }
+.ring-b { animation-delay: -8s; }
+.orbit-moon, .charge-orb { animation: mm-float 8s ease-in-out infinite, mm-halo 7s ease-in-out infinite; }
+.charge-orb { animation: mm-halo 7s ease-in-out infinite; }
+.spark { animation: mm-twinkle 5.2s ease-in-out infinite; }
+.spark.s2 { animation-delay: -1.8s; }
+.spark.s3 { animation-delay: -3.4s; }
+
+.hero-lineart { animation: mm-fade 1.1s ease both; }
+.hero-art-ink, .hero-art-soft { transition: opacity var(--motion-soft) ease; }
+.hero:hover .hero-art-ink { opacity: .9; }
+.hero:hover .orbit-moon { transform: translateY(-3px) scale(1.012); }
+.orbit-moon { transition: transform 900ms var(--ease-soft); }
+
+.metric-icon, .page-sigil, .card-icon, .quick-icon, .fusion-icon {
+  transition: transform 420ms var(--ease-soft), background 400ms ease, color 400ms ease;
+}
+.metric-icon { animation: mm-float 9s ease-in-out infinite; }
+.metric-card:nth-child(2) .metric-icon { animation-delay: -3s; }
+.metric-card:nth-child(3) .metric-icon { animation-delay: -5.5s; }
+.metric-card:hover .metric-icon, .calendar-card:hover .card-icon, .fusion-card:hover .fusion-icon {
+  transform: translateY(-3px) rotate(-3deg);
+  color: #fff;
+  background: linear-gradient(145deg, #9bd2e3, #4c8da8);
+}
+.page.active .page-sigil { animation: mm-float 8s ease-in-out infinite; }
+
+.page.active > * { animation: mm-rise 620ms var(--ease-soft) backwards; }
+.page.active > *:nth-child(2) { animation-delay: 70ms; }
+.page.active > *:nth-child(3) { animation-delay: 130ms; }
+.page.active > *:nth-child(4) { animation-delay: 190ms; }
+
+.page.active .metric-row > *,
+.page.active .content-grid > *,
+.page.active .skin-grid > *,
+.page.active .calendar-cards > *,
+.page.active .quick-grid > *,
+.page.active .reading-sections > *,
+.page.active .collection-grid > *,
+.page.active .guide-list > * {
+  animation: mm-rise 700ms var(--ease-soft) backwards;
+}
+
+.page.active :is(.metric-row, .content-grid, .skin-grid, .calendar-cards, .quick-grid,
+  .reading-sections, .collection-grid, .guide-list) > *:nth-child(2) { animation-delay: 70ms; }
+.page.active :is(.metric-row, .content-grid, .skin-grid, .calendar-cards, .quick-grid,
+  .reading-sections, .collection-grid, .guide-list) > *:nth-child(3) { animation-delay: 140ms; }
+.page.active :is(.metric-row, .content-grid, .skin-grid, .calendar-cards, .quick-grid,
+  .reading-sections, .collection-grid, .guide-list) > *:nth-child(4) { animation-delay: 210ms; }
+.page.active :is(.metric-row, .content-grid, .skin-grid, .calendar-cards, .quick-grid,
+  .reading-sections, .collection-grid, .guide-list) > *:nth-child(5) { animation-delay: 280ms; }
+
+.nav-icon, .quick-arrow, .tab-icon, .button-icon, .inline-icon {
+  transition: transform 380ms var(--ease-soft), color 320ms ease, background 380ms ease;
+}
+.nav-item:hover .nav-icon, .nav-item.active .nav-icon { transform: translateY(-1px) rotate(-3deg); }
+.segmented button:hover .tab-icon { transform: translateY(-1px) rotate(-4deg); }
+.primary-button:hover .button-icon, .soft-button:hover .button-icon { transform: rotate(-5deg) scale(1.04); }
+
+.quick-card:hover .quick-icon { transform: rotate(-4deg) scale(1.04); }
+.quick-card:active .quick-icon { transform: scale(.96); }
+
+.mm-decor-cloud { animation: mm-drift 21s ease-in-out infinite alternate; }
+.mm-decor-leaf { animation: mm-sway 12s ease-in-out infinite; transform-origin: 50% 90%; }
+.mm-decor-flower { animation: mm-float 10s ease-in-out infinite; }
+.mm-decor-star { animation: mm-twinkle 7s ease-in-out infinite; }
+
+.skin-live-card, .skin-live-tube { animation: mm-float 8s ease-in-out infinite; }
+.skin-live-tube { animation-delay: -4s; }
+.skin-card.selectable:hover .preview-art { transform: rotate(-8deg) scale(1.05); }
+.preview-art { transition: transform 480ms var(--ease-soft); }
+
+.avatar-sigil { animation: mm-breathe 9s ease-in-out infinite; }
+.score-ring { animation: mm-breathe 8s ease-in-out infinite; }
+
+.clean-item, .wish-item, .seal-item, .audio-item, .reading-section, .calendar-card,
+.metric-card, .collect-card, .skin-card, .quick-card, .fusion-card, .page-sigil {
+  transition: transform 450ms var(--ease-soft), box-shadow 450ms var(--ease-soft),
+    border-color 350ms ease, background 400ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .wish-item:hover, .seal-item:hover, .audio-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(135, 192, 211, .34);
+    box-shadow: 0 16px 34px rgba(38, 89, 109, .09);
+  }
+  .glass:hover { border-color: rgba(177, 218, 232, .56); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root[data-motion="off"] *,
+:root[data-motion="off"] *::before,
+:root[data-motion="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+:root[data-motion="off"] #starCanvas,
+:root[data-motion="off"] .pointer-glow,
+:root[data-motion="off"] .ambient {
+  opacity: 0 !important;
+}
